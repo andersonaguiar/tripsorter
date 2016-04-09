@@ -1,0 +1,34 @@
+{
+  "name": "tripsorter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app-server.js",
+  "dependencies": {
+    "babel": "^5.8.29",
+    "babel-core": "^5.8.32",
+    "babel-loader": "^5.3.2",
+    "events": "^1.1.0",
+    "exports-loader": "^0.6.3",
+    "express": "^4.13.3",
+    "history": "^1.14.0",
+    "hogan-express": "^0.5.2",
+    "imports-loader": "^0.6.5",
+    "lodash": "^3.10.1",
+    "node-fetch": "^1.5.0",
+    "react": "^0.14.1",
+    "react-dom": "^0.14.1",
+    "react-router": "^1.0.1",
+    "webpack": "^1.12.2"
+  },
+  "scripts": {
+    "dev": "cp views/index.html public/index.html && NODE_ENV=development webpack && webpack-dev-server --content-base public/ --hot --inline --devtool inline-source-map --history-api-fallback",
+    "production": "rm -rf public/index.html && NODE_ENV=production webpack -p && NODE_ENV=production node app.js",
+    "start": "npm run production"
+  },
+  "author": "Anderson Aguiar",
+  "license": "ISC",
+  "devDependencies": {
+    "react-hot-loader": "^1.3.0",
+    "webpack-dev-server": "^1.12.1"
+  }
+}
