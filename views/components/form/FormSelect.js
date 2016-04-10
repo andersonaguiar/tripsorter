@@ -4,11 +4,11 @@ export default class FormSelect extends Component {
   componentDidMount(){ }
 
   render(){
-    let {options, ...props} = this.props
+    let {defaultValue, options, ...props} = this.props
 
     return (
       <select {...props}>
-        <option value="">Selecione</option>
+        <option value="">{defaultValue}</option>
         {
           options.map((option, i) => {
             return <option key={i}>{option}</option>

@@ -6,8 +6,13 @@ export default class App extends Component {
   }
   render(){
     return (
-      <div className="pf-tripsorter">
-        <h1>Tripsorter</h1>
+      <div className="tripsorter">
+        <header className="header">
+          <h1 className="header-logo">
+            <span className="none">MyCRM</span>
+          </h1>
+          <h2 className="header-text">Tripsorter</h2>
+        </header>
         { this.props.children }
       </div>
     )

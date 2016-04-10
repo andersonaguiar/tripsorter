@@ -9,10 +9,12 @@ module.exports = {
     publicPath: '/dist/'
   },
   module: {
-    loaders: [{
-      test: /\.js$/,
-      loaders: loaders,
-      exclude: /node_modules/
-    }]
+    loaders: [
+      {
+        test: /\.js$/,
+        loaders: loaders,
+        exclude: /node_modules/
+      }
+    ]
   }
 };

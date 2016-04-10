@@ -1,2 +1,66 @@
-body 
-  background: red
+*
+  margin 0
+  padding 0
+  box-sizing border-box
+
+body
+  font 13px Arial
+
+.header
+  background #29608B
+  width 100%
+  overflow hidden
+  padding 10px
+  margin-bottom 20px
+  &-logo
+    background url(../img/mycrm-logo.png) no-repeat top center
+    float left
+    width 260px
+    height 86px
+  &-text
+    float right
+    color #fff
+    margin-top 30px
+  @media screen and (max-width: 600px)
+    text-align center
+    &-logo
+      text-align center
+      float none
+      display inline-block
+      width 100%
+
+    &-text
+      float none
+      display inline-block
+      width 100%
+
+form
+  clear both
+  padding 0 20px
+  width 90%
+  margin 0 auto
+  .row
+    margin-bottom 10px
+  .radio-text
+    margin 0 15px 0 5px
+  select, input[type="submit"]
+    width 100%
+  input[type="submit"]
+    border solid 2px
+    background green
+    padding 10px
+    cursor pointer
+    font-weight bold
+    color #fff
+    font-size 14px
+
+table
+  padding 0 20px
+  width 90%
+  margin 0 auto
+  td
+    border solid 1px
+    padding 5px
+
+.none
+  display none

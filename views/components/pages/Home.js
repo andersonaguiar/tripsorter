@@ -108,6 +108,7 @@ export default class Home extends Component {
         <div className="row">
           <FormSelect
             name="departure"
+            defaultValue="From"
             options={this.state.departures}
             onChange={this.getArrivalsByDeparture.bind(this)}
           />
@@ -115,6 +116,7 @@ export default class Home extends Component {
         <div className="row">
           <FormSelect
             name="arrival"
+            defaultValue="To"
             options={this.state.arrivals}
             disabled={this.state.arrivals == false}
           />
@@ -126,8 +128,9 @@ export default class Home extends Component {
             value="cheapest"
             defaultChecked
           />
-          Cheapest
-          <input type="radio" name="sort" value="fastest" />Fastest
+          <label className="radio-text">Cheapest</label>
+          <input type="radio" name="sort" value="fastest" />
+          <label className="radio-text">Fastest</label>
         </div>
         <div className="row">
           <input type="submit" value="Search "/>
