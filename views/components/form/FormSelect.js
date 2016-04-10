@@ -1,18 +1,19 @@
 import React, { Component } from 'react'
 
 export default class FormSelect extends Component {
-  componentDidMount(){
-
-  }
+  componentDidMount(){ }
 
   render(){
-    let options = this.props.options.map((option, i) => {
-      return React.createElement('option', {key: i}, option)
-    })
+    let {options, ...props} = this.props
 
     return (
-      <select name={this.props.name}>
-        {options}
+      <select {...props}>
+        <option value="">Selecione</option>
+        {
+          options.map((option, i) => {
+            return <option key={i}>{option}</option>
+          })
+        }
       </select>
     )
   }
