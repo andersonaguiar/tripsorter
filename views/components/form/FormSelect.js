@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 
 export default class FormSelect extends Component {
   componentDidMount(){ }
@@ -17,4 +17,10 @@ export default class FormSelect extends Component {
       </select>
     )
   }
+}
+
+FormSelect.propTypes = {
+  defaultValue: PropTypes.string,
+  name: PropTypes.string,
+  options: PropTypes.array
 }

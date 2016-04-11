@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Header from './pages/partials/Header'
 
 export default class App extends Component {
   componentDidMount(){
@@ -7,12 +8,7 @@ export default class App extends Component {
   render(){
     return (
       <div className="tripsorter">
-        <header className="header">
-          <h1 className="header-logo">
-            <span className="none">MyCRM</span>
-          </h1>
-          <h2 className="header-text">Tripsorter</h2>
-        </header>
+        <Header />
         { this.props.children }
       </div>
     )

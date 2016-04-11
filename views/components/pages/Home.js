@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
-import FormSelect from '../form/FormSelect'
+import Form from '../Form'
+import Result from '../Result'
+import EventEmitter from 'wolfy87-eventemitter'
+
+const ee = new EventEmitter()
 
 export default class Home extends Component {
   constructor(props){
@@ -13,6 +17,8 @@ export default class Home extends Component {
 
   componentDidMount(){
     this.getDeals()
+
+    ee.addListener('form-submit', this.submit.bind(this));
   }
 
   getDeals(){
@@ -59,15 +65,7 @@ export default class Home extends Component {
     })
   }
 
-  submit(e){
-    e.preventDefault()
-
-    let params = {
-      departure: this.refs.form.departure.value,
-      arrival: this.refs.form.arrival.value,
-      sort: this.refs.form.sort.value
-    }
-
+  submit(params){
     this.setState({
       results: this.search(params)
     })
@@ -77,19 +75,19 @@ export default class Home extends Component {
     switch (type) {
       case 'cheapest':
           results.sort((a, b) => {
-            return parseFloat(a.cost) - parseFloat(b.cost);
+            return parseFloat(a.cost) - parseFloat(b.cost)
           })
-        break;
+        break
       case 'fastest':
         results.sort((a, b) => {
           let timeA = a.duration.h * 60 + a.duration.m
           let timeB = b.duration.h * 60 + b.duration.m
-          return timeA - timeB;
+          return timeA - timeB
         })
-        break;
+        break
     }
 
-    return results;
+    return results
   }
 
   search(params){
@@ -99,84 +97,23 @@ export default class Home extends Component {
              item.arrival == params.arrival
     })
 
-    return this.sortResults(params.sort, results);
+    return this.sortResults(params.sort, results)
   }
 
-  showForm(){
-    return (
-      <form action="" ref="form" onSubmit={this.submit.bind(this)}>
-        <div className="row">
-          <FormSelect
-            name="departure"
-            defaultValue="From"
-            options={this.state.departures}
-            onChange={this.getArrivalsByDeparture.bind(this)}
-          />
-        </div>
-        <div className="row">
-          <FormSelect
-            name="arrival"
-            defaultValue="To"
-            options={this.state.arrivals}
-            disabled={this.state.arrivals == false}
-          />
-        </div>
-        <div className="row">
-          <input
-            type="radio"
-            name="sort"
-            value="cheapest"
-            defaultChecked
-          />
-          <label className="radio-text">Cheapest</label>
-          <input type="radio" name="sort" value="fastest" />
-          <label className="radio-text">Fastest</label>
-        </div>
-        <div className="row">
-          <input type="submit" value="Search "/>
-        </div>
-      </form>
-    )
-  }
-
-  showResults(){
-    if (!this.state.results) return null;
-
-    return (
-      <table>
-        <thead>
-          <tr>
-            <th>Ref</th>
-            <th>Departure</th>
-            <th>Arrival</th>
-            <th>Cost ({this.state.currency})</th>
-            <th>Duration</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            this.state.results.map((trip, i) => {
-              return <tr key={i}>
-                <td>{trip.reference}</td>
-                <td>{trip.departure}</td>
-                <td>{trip.arrival}</td>
-                <td>{trip.cost}</td>
-                <td>{trip.duration.h}:{trip.duration.m}</td>
-              </tr>
-            })
-          }
-        </tbody>
-      </table>
-    )
-  }
 
   render(){
-    if (!this.state.departures) return null
-
     return (
       <div>
-        {this.showForm()}
-        {this.showResults()}
+        <Form
+          onChange={this.getArrivalsByDeparture.bind(this)}
+          departures={this.state.departures}
+          arrivals={this.state.arrivals}
+          ee={ee}
+        />
+        <Result
+          results={this.state.results}
+          currency={this.state.currency}
+        />
       </div>
     )
   }
