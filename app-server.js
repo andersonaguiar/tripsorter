@@ -15,24 +15,26 @@ app.set('views', __dirname + '/views')
 app.use('/', express.static(__dirname + '/public/'))
 app.set('port', (process.env.PORT || 3000))
 
-app.get('*',(req, res) => {
-
+app.get('*', (req, res) => {
   match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
-
     const reactMarkup = ReactDOMServer.renderToStaticMarkup(<RoutingContext {...renderProps}/>)
 
     res.locals.reactMarkup = reactMarkup
 
     if (error) {
-      res.status(500).send(error.message)
-    } else if (redirectLocation) {
-      res.redirect(302, redirectLocation.pathname + redirectLocation.search)
-    } else if (renderProps) {
-      // Success!
-      res.status(200).render('index.html')
-    } else {
-      res.status(404).render('index.html')
+      return res.status(500).send(error.message)
     }
+
+    if (redirectLocation) {
+      return res.redirect(302, redirectLocation.pathname + redirectLocation.search)
+    }
+
+    if (renderProps) {
+      // Success!
+      return res.status(200).render('index.html')
+    }
+
+    return res.status(404).render('index.html')
   })
 })
 
