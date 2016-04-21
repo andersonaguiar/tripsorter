@@ -28,8 +28,7 @@
     "react": "^0.14.1",
     "react-dom": "^0.14.1",
     "react-router": "^1.0.1",
-    "webpack": "^1.12.2",
-    "wolfy87-eventemitter": "^4.3.0"
+    "webpack": "^1.12.2"
   },
   "scripts": {
     "dev": "cp views/index.html public/index.html && NODE_ENV=development webpack && webpack-dev-server --content-base public/ --hot --inline --devtool inline-source-map --history-api-fallback",

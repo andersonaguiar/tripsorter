@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import Form from '../Form'
 import Result from '../Result'
-import EventEmitter from 'wolfy87-eventemitter'
-
-const ee = new EventEmitter()
 
 export default class Home extends Component {
   constructor(props){
@@ -17,8 +14,6 @@ export default class Home extends Component {
 
   componentDidMount(){
     this.getDeals()
-
-    ee.addListener('form-submit', this.submit.bind(this));
   }
 
   getDeals(){
@@ -106,9 +101,9 @@ export default class Home extends Component {
       <div>
         <Form
           onChange={this.getArrivalsByDeparture.bind(this)}
+          onSubmit={this.submit.bind(this)}
           departures={this.state.departures}
           arrivals={this.state.arrivals}
-          ee={ee}
         />
         <Result
           results={this.state.results}

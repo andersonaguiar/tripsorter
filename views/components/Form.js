@@ -7,13 +7,11 @@ export default class Form extends Component {
   submit(e){
     e.preventDefault()
 
-    let params = {
+    this.props.onSubmit({
       departure: this.refs.form.departure.value,
       arrival: this.refs.form.arrival.value,
       sort: this.refs.form.sort.value
-    }
-
-    this.props.ee.emitEvent('form-submit', [params]);
+    })
   }
 
   render(){
